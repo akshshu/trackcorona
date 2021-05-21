@@ -1,0 +1,494 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- font awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css"
+        integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
+    <style>
+        .section {
+            padding-top: 4vw;
+            padding-bottom: 4vw;
+
+        }
+
+        .dropdown-content li>a,
+        .dropdown-content li>span {
+            color: rgb(5, 1, 126);
+        }
+
+        .status {
+            margin-top: 4vw;
+        }
+
+        .nav-links>li>a {
+            color: White;
+            font-weight: 600;
+        }
+
+        .sts {
+            margin-top: 60px !important;
+        }
+
+        .detail-card {
+            border-radius: 0.25rem;
+        }
+
+        .box-head {
+            padding-top: 1rem;
+        }
+
+        .box-det {
+            padding: 0.4rem;
+            border-radius: 0.25rem;
+        }
+
+        .chek {
+            background-image: url(images/proj-banner.jpg);
+            background-position: center;
+            background-size: cover;
+        }
+
+        h5 {
+            color: white;
+            font-size: 3vw;
+            margin-bottom: 0px;
+        }
+
+        .tabs {
+            background-color: transparent;
+
+        }
+
+        .special-margin {
+            margin: 0.2vw 0 4vw 0;
+            font-weight: 600 !important;
+        }
+
+        .tabs .tab a:hover,
+        .tabs .tab a.active {
+            color: white;
+            font-weight: 500;
+            font-size: 1.2rem;
+        }
+
+        .tabs .tab a {
+            color: white;
+            font-weight: 500;
+            font-size: 1.1rem;
+        }
+
+        .form-box {
+            /* padding: 2rem !important; */
+            /* margin-left: -4.5rem; */
+            min-width: 300px;
+        }
+
+        .details-box {
+            margin-top: 70px;
+        }
+
+        .above-footer {
+            margin-top: -22px;
+            padding: 2.5vw 0 2vw 0;
+        }
+
+        .page-footer {
+            padding: 0;
+        }
+
+
+
+        .nav-ico {
+            margin: 4.1px 0.5px 0 0 !important;
+            font-size: 25px !important;
+        }
+
+        #disttab {
+            color: black;
+        }
+
+        #stattab {
+            color: black;
+        }
+    </style>
+    <title>TrackCorona</title>
+</head>
+
+<body>
+    <header>
+        <nav class="nav-wrapper blue darken-4 z-depth-0">
+            <div class="container">
+                <a href="#" class="brand-logo white-text">
+                    <i class="material-icons nav-ico">room</i>TrackCorona</a>
+                <a href="" class="sidenav-trigger" data-target="mobile">
+                    <i class="material-icons">menu</i>
+                </a>
+                <ul class="right hide-on-med-and-down nav-links">
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#ind-world">World</a></li>
+                    <li><a href="#ind-world">India</a></li>
+                    <li><a href="#AboutMe">About Me</a></li>
+                </ul>
+                <ul id="mobile" class="sidenav">
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#ind-world">World</a></li>
+                    <li><a href="#ind-world">India</a></li>
+                    <li><a href="#AboutMe">AboutMe</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <div class="banner">
+        <section class="container section  ">
+            <div class="row">
+                <!-- <div class="col s12 l5  form-box">
+                    <blockquote>
+                        <h4 class=" special-margin  blue-text text-darken-4  ">District-Wise</h4>
+                    </blockquote>
+                    <div class="input-field sts">
+                        <select id="states_list" onchange="res_district(this.value)">
+                            <option value="" disabled selected>Select State</option>
+                        </select>
+                        <label>Select State</label>
+
+                    </div>
+
+                    <div class="input-field sts">
+                        <select id="districts_list">
+                            <option value="" disabled selected>Select District</option>
+
+                        </select>
+                        <label>Select District</label>
+                    </div>
+                    <div class="input-field sts">
+                        <button class="btn right blue darken-4" onclick="show_data()">Show</button>
+                    </div>
+                </div> -->
+                <div class="col s12 l6">
+                    <div class=" scrollspy col s12" id="dist-state">
+                        <div class="col s12">
+                            <ul class="tabs">
+                                <li class="tab col s6">
+                                    <a id=disttab href="#dis">District Wise</a>
+                                </li>
+                                <li class="tab col s6">
+                                    <a id=stattab href="#stat">Statewise</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col s12 status" id="dis">
+                            <div class="  form-box">
+                                <div class="input-field sts">
+                                    <select id="states_list" onchange="res_district(this.value)">
+                                        <option value="" disabled selected>Select State</option>
+                                    </select>
+                                    <label>Select State</label>
+
+                                </div>
+
+                                <div class="input-field sts">
+                                    <select id="districts_list">
+                                        <option value="" disabled selected>Select District</option>
+
+                                    </select>
+                                    <label>Select District</label>
+                                </div>
+                                <div class="input-field sts">
+                                    <button class="btn right blue darken-4" onclick="show_data()">Show</button>
+                                </div>
+                            </div>
+
+
+                        </div>
+                        <div class="col s12 status" id="stat">
+                            <div class="  form-box">
+                                <div class="input-field sts">
+                                    <select id="states_list" onchange="res_district(this.value)">
+                                        <option value="" disabled selected>Select State</option>
+                                    </select>
+                                    <label>Select State</label>
+
+                                </div>
+
+                                <div class="input-field sts">
+                                    <button class="btn right blue darken-4" onclick="show_data()">Show</button>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col s12 l6 details-box">
+                    <div class="row">
+                        <div class="col s6 l5 offset-l1 ">
+                            <div class=" blue lighten-5 detail-card  ">
+                                <h4 class="center blue-text box-head" id="total">0</h4>
+                                <h6 class="center blue-text blue lighten-4 box-det">Confirmed</h6>
+                            </div>
+                        </div>
+                        <div class="col s6 l5 offset-l1 ">
+                            <div class=" yellow lighten-5 detail-card  ">
+                                <h4 class="center yellow-text box-head" id="active">0</h4>
+                                <h6 class="center yellow-text yellow lighten-4 box-det">Active</h6>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="col s6 l5 offset-l1 ">
+                            <div class=" green lighten-5 detail-card  ">
+                                <h4 class="center green-text text-darken-4 box-head" id="recovered">0</h4>
+                                <h6 class="center green-text text-darken-4 green lighten-4 box-det">Recovered</h6>
+                            </div>
+                        </div>
+                        <div class="col s6 l5 offset-l1 ">
+                            <div class=" red lighten-5 detail-card  ">
+                                <h4 class="center red-text box-head" id="deaths">0</h4>
+                                <h6 class="center red-text red lighten-4 box-det">Deaths</h6>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </section>
+    </div>
+    <section>
+        <div class="row chek scrollspy " id="ind-world">
+            <div class="col s12 ">
+                <ul class="tabs">
+                    <li class="tab col s6">
+                        <a href="#India">India</a>
+                    </li>
+                    <li class="tab col s6">
+                        <a href="#World">World</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="container ">
+                <div class="col s12 status" id="India">
+                    <div class="row ">
+                        <div class="col l3 s6 center">
+                            <h5 class="blue-text text-lighten-3" id="ind-total">0</h5>
+                            <p class="white-text special-margin">Confirmed</p>
+
+                        </div>
+                        <div class="col l3 s6 center">
+                            <h5 class="yellow-text text-lighten-3" id="ind-active">0</h5>
+                            <p class=" white-text special-margin">Active</p>
+
+                        </div>
+                        <div class="col l3 s6 center">
+                            <h5 class="green-text text-lighten-3" id="ind-recovered">0</h5>
+                            <p class=" white-text special-margin">Recovered</p>
+
+                        </div>
+                        <div class="col l3 s6 center">
+                            <h5 class="red-text text-lighten-3" id="ind-deaths">0</h5>
+                            <p class=" white-text special-margin">Deaths</p>
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+            </div>
+            <div class="container ">
+                <div class="col s12 status" id="World">
+                    <div class="row ">
+                        <div class="col l3 s6 center">
+                            <h5 class="blue-text text-lighten-3" id="world-total">0</h5>
+                            <p class="white-text special-margin">Confirmed</p>
+
+                        </div>
+                        <div class="col l3 s6 center">
+                            <h5 class="yellow-text text-lighten-3" id="world-active">0</h5>
+                            <p class=" white-text special-margin">Active</p>
+
+                        </div>
+                        <div class="col l3 s6 center">
+                            <h5 class="green-text text-lighten-3" id="world-recovered">0</h5>
+                            <p class=" white-text special-margin">Recovered</p>
+
+                        </div>
+                        <div class="col l3 s6 center">
+                            <h5 class="red-text text-lighten-3" id="world-deaths">0</h5>
+                            <p class=" white-text special-margin">Deaths</p>
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class=" above-footer scrollspy" id="AboutMe">
+        <div class="container">
+            <div class="row ">
+                <div class="col  s12 m5">
+                    <blockquote>
+                        <h4 class=" blue-text text-darken-4">About Me</h4>
+                    </blockquote>
+                    <p>
+                        Hello,</br>
+                        My Name is Akash.I am a btech graduate and currently persuing my mtech in Computer
+                        Science.This Website is created using materialize Css,Javascript.
+                        This website is developed so that people can check Covid status in their District as well as in
+                        the world.The UI is kept simple and minimal.Please provide any suggestion or question by filling
+                        the form provided.ThankYou.
+                    </p>
+                </div>
+                <div class="col  s12 m5 offset-m2">
+                    <form class="gform" method="POST"
+                        action="https://script.google.com/macros/s/AKfycbxfCpBUfpIqyheqepq7D1q90V6bLmzgaH1IOEEdYkiqnQl6B6R2/exec">
+                        <div class="input-field">
+                            <i class="material-icons prefix  blue-text text-darken-4">person</i>
+                            <input type="text" name="name">
+                            <label>Name</label>
+                        </div>
+                        <div class="input-field">
+                            <i class="material-icons prefix  blue-text text-darken-4">email</i>
+                            <input type="email" name="email">
+                            <label>E-mail</label>
+                        </div>
+                        <div class="input-field">
+                            <i class="material-icons prefix  blue-text text-darken-4">message</i>
+                            <textarea id="message" class="materialize-textarea" name="message"></textarea>
+                            <label for="message">Your Message</label>
+                        </div>
+                        <div class="input-field right">
+                            <button type="submit" class="btn blue darken-4">Submit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer class="page-footer blue darken-4">
+        <div class="footer-copyright ">
+            <div class="container center-align">&copy; ASG Web 2020</div>
+        </div>
+    </footer>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('.sidenav').sidenav();
+            $('.tabs').tabs();
+            fetch("https://api.covid19india.org/v4/min/data.min.json")
+                .then((response) => response.json())
+                .then((json) => {
+                    var ind_confirmed = 0;
+                    var ind_active = 0;
+                    var ind_recovered = 0;
+                    var ind_deaths = 0;
+
+
+                    for (var key in json) {
+                        ind_confirmed += json[key]["total"]["confirmed"];
+                        ind_deaths += json[key]["total"]["deceased"];
+                        ind_recovered += json[key]["total"]["recovered"];
+
+                    }
+                    ind_active = ind_confirmed - (ind_recovered + ind_deaths)
+                    document.getElementById("ind-total").textContent = ind_confirmed;
+                    document.getElementById("ind-active").textContent = ind_active;
+                    document.getElementById("ind-recovered").textContent = ind_recovered;
+                    document.getElementById("ind-deaths").textContent = ind_deaths;
+                });
+            fetch("https://api.covid19api.com/world/total")
+                .then((response) => response.json())
+                .then((json) => {
+                    var worldRecovered = json["TotalRecovered"];
+                    var worldTotal = json["TotalConfirmed"];
+                    var worldDeath = json["TotalDeaths"];
+                    var worldActive = worldTotal - (worldDeath + worldRecovered);
+                    document.getElementById("world-total").textContent = worldTotal;
+                    document.getElementById("world-active").textContent = worldActive;
+                    document.getElementById("world-recovered").textContent = worldRecovered;
+                    document.getElementById("world-deaths").textContent = worldDeath;
+                });
+            var i, state_list = [];
+
+            fetch("https://api.covid19india.org/state_district_wise.json")
+                .then((response) => response.json())
+                .then((json) => {
+                    for (i in json) {
+                        $('#states_list').append('<option >' + i + '</option>');
+                        $('#states_list').formSelect();
+
+                    }
+                });
+
+            $('select').formSelect();
+            $('.scrollspy').scrollSpy();
+
+
+        });
+        function res_district(selected_state) {
+            var i, districts = [];
+            console.log("s");
+            $('#districts_list').empty();
+            fetch("https://api.covid19india.org/state_district_wise.json")
+                .then((response) => response.json())
+                .then((json) => {
+                    for (i in json[selected_state]['districtData']) {
+                        $('#districts_list').append('<option >' + i + '</option>');
+                        $('#districts_list').formSelect();
+
+                    }
+                });
+        }
+        function show_data() {
+            var selectedState = document.getElementById("states_list").value;
+            var selectedDistrict = document.getElementById("districts_list").value;
+            console.log(selectedDistrict);
+            fetch("https://api.covid19india.org/state_district_wise.json")
+                .then((response) => response.json())
+                .then((json) => {
+                    var confirmed = json[selectedState]['districtData'][selectedDistrict]['confirmed'];
+                    var active = json[selectedState]['districtData'][selectedDistrict]['active'];
+                    var death = json[selectedState]['districtData'][selectedDistrict]['deceased'];
+                    var recovered = json[selectedState]['districtData'][selectedDistrict]['recovered'];
+                    console.log(confirmed);
+                    document.getElementById("total").textContent = confirmed;
+                    document.getElementById("active").textContent = active;
+                    document.getElementById("recovered").textContent = recovered;
+                    document.getElementById("deaths").textContent = death;
+                });
+        }
+        function show_data2() {
+            var selectedState = document.getElementById("states_list").value;
+            var selectedDistrict = document.getElementById("districts_list").value;
+            console.log(selectedDistrict);
+            fetch("https://api.covid19india.org/state_district_wise.json")
+                .then((response) => response.json())
+                .then((json) => {
+                    var confirmed = json[selectedState]['districtData'][selectedDistrict]['confirmed'];
+                    var active = json[selectedState]['districtData'][selectedDistrict]['active'];
+                    var death = json[selectedState]['districtData'][selectedDistrict]['deceased'];
+                    var recovered = json[selectedState]['districtData'][selectedDistrict]['recovered'];
+                    console.log(confirmed);
+                    document.getElementById("total").textContent = confirmed;
+                    document.getElementById("active").textContent = active;
+                    document.getElementById("recovered").textContent = recovered;
+                    document.getElementById("deaths").textContent = death;
+                });
+        }
+    </script>
+</body>
+
+</html>
