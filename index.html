@@ -90,9 +90,9 @@
             min-width: 300px;
         }
 
-        .details-box {
+        /* .details-box {
             margin-top: 70px;
-        }
+        } */
 
         .above-footer {
             margin-top: -22px;
@@ -147,7 +147,7 @@
     </header>
 
     <div class="banner">
-        <section class="container section  ">
+        <section class="section  ">
             <div class="row">
                 <!-- <div class="col s12 l5  form-box">
                     <blockquote>
@@ -211,7 +211,7 @@
                         <div class="col s12 status" id="stat">
                             <div class="  form-box">
                                 <div class="input-field sts">
-                                    <select id="states_list" onchange="res_district(this.value)">
+                                    <select id="states_list2">
                                         <option value="" disabled selected>Select State</option>
                                     </select>
                                     <label>Select State</label>
@@ -219,7 +219,7 @@
                                 </div>
 
                                 <div class="input-field sts">
-                                    <button class="btn right blue darken-4" onclick="show_data()">Show</button>
+                                    <button class="btn right blue darken-4" onclick="show_data2()">Show</button>
                                 </div>
                             </div>
 
@@ -254,6 +254,21 @@
                             <div class=" red lighten-5 detail-card  ">
                                 <h4 class="center red-text box-head" id="deaths">0</h4>
                                 <h6 class="center red-text red lighten-4 box-det">Deaths</h6>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="col s6 l5 offset-l1 ">
+                            <div class=" green lighten-5 detail-card  ">
+                                <h4 class="center green-text text-darken-4 box-head" id="tested">0</h4>
+                                <h6 class="center green-text text-darken-4 green lighten-4 box-det">Tested</h6>
+                            </div>
+                        </div>
+                        <div class="col s6 l5 offset-l1 ">
+                            <div class=" red lighten-5 detail-card  ">
+                                <h4 class="center red-text box-head" id="vaccinated">0</h4>
+                                <h6 class="center red-text red lighten-4 box-det">Vaccinated</h6>
                             </div>
                         </div>
 
@@ -388,20 +403,76 @@
         $(document).ready(function () {
             $('.sidenav').sidenav();
             $('.tabs').tabs();
+            mapping = {
+                "Andaman and Nicobar Islands": "AN",
+                "Andhra Pradesh": "AP",
+                "Arunachal Pradesh": "AR",
+                "Assam": "AS",
+                "Bihar": "BR",
+                "Chandigarh": "CH",
+                "Chhattisgarh": "CT",
+                "Delhi": "DL",
+                "Dadra and Nagar Haveli and Daman and Diu": "DN",
+                "Goa": "GA",
+                "Gujarat": "GJ",
+                "Himachal Pradesh": "HP",
+                "Haryana": "HR",
+                "Jharkhand": "JH",
+                "Jammu and Kashmir": "JK",
+                "Karnataka": "KA",
+                "Kerala": "KL",
+                "Ladakh": "LA",
+                "Lakshadweep": "LD",
+                "Maharashtra": "MH",
+                "Meghalaya": "ML",
+                "Manipur": "MN",
+                "Madhya Pradesh": "MP",
+                "Mizoram": "MZ",
+                "Nagaland": "NL",
+                "Odisha": "OR",
+                "Punjab": "PB",
+                "Puducherry": "PY",
+                "Rajasthan": "RJ",
+                "Sikkim": "SK",
+                "Telangana": "TG",
+                "Tamil Nadu": "TN",
+                "Tripura": "TR",
+                "Total": "TT",
+                "Uttar Pradesh": "UP",
+                "Uttarakhand": "UT",
+                "West Bengal": "WB"
+            };
+            mapping2 = {
+                "AN": "Andaman and Nicobar Islands", "AP": "Andhra Pradesh", "AR": "Arunachal Pradesh", "AS": "Assam", "BR": "Bihar", "CH": "Chandigarh", "CT": "Chhattisgarh", "DL": "Delhi", "DN": "Dadra and Nagar Haveli and Daman and Diu",
+                "GA": "Goa", "GJ": "Gujarat", "HP": "Himachal Pradesh", "HR": "Haryana", "JH": "Jharkhand", "JK": "Jammu and Kashmir", "KA": "Karnataka", "KL": "Kerala", "LA": "Ladakh", "LD": "Lakshadweep", "MH": "Maharashtra", "ML": "Meghalaya",
+                "MN": "Manipur", "MP": "Madhya Pradesh", "MZ": "Mizoram", "NL": "Nagaland", "OR": "Odisha", "PB": "Punjab", "PY": "Puducherry", "RJ": "Rajasthan", "SK": "Sikkim", "TG": "Telangana", "TN": "Tamil Nadu", "TR": "Tripura",
+                "TT": "Total", "UP": "Uttar Pradesh", "UT": "Uttarakhand", "WB": "West Bengal"
+            };
+            states = []
+            dicto = {}
             fetch("https://api.covid19india.org/v4/min/data.min.json")
                 .then((response) => response.json())
                 .then((json) => {
+                    dicto = json;
                     var ind_confirmed = 0;
                     var ind_active = 0;
                     var ind_recovered = 0;
                     var ind_deaths = 0;
 
-
                     for (var key in json) {
-                        ind_confirmed += json[key]["total"]["confirmed"];
-                        ind_deaths += json[key]["total"]["deceased"];
-                        ind_recovered += json[key]["total"]["recovered"];
+                        if (key != "TT") {
+                            states.push(mapping2[key]);
+                            ind_confirmed += json[key]["total"]["confirmed"];
+                            ind_deaths += json[key]["total"]["deceased"];
+                            ind_recovered += json[key]["total"]["recovered"];
+                        }
 
+                    }
+                    for (var i = 0; i < states.length; i++) {
+                        $('#states_list').append('<option >' + states[i] + '</option>');
+                        $('#states_list2').append('<option >' + states[i] + '</option>');
+                        $('#states_list').formSelect();
+                        $('#states_list2').formSelect();
                     }
                     ind_active = ind_confirmed - (ind_recovered + ind_deaths)
                     document.getElementById("ind-total").textContent = ind_confirmed;
@@ -421,17 +492,7 @@
                     document.getElementById("world-recovered").textContent = worldRecovered;
                     document.getElementById("world-deaths").textContent = worldDeath;
                 });
-            var i, state_list = [];
 
-            fetch("https://api.covid19india.org/state_district_wise.json")
-                .then((response) => response.json())
-                .then((json) => {
-                    for (i in json) {
-                        $('#states_list').append('<option >' + i + '</option>');
-                        $('#states_list').formSelect();
-
-                    }
-                });
 
             $('select').formSelect();
             $('.scrollspy').scrollSpy();
@@ -441,52 +502,46 @@
         function res_district(selected_state) {
             var i, districts = [];
             console.log("s");
+            console.log(states);
+            console.log(dicto);
             $('#districts_list').empty();
-            fetch("https://api.covid19india.org/state_district_wise.json")
-                .then((response) => response.json())
-                .then((json) => {
-                    for (i in json[selected_state]['districtData']) {
-                        $('#districts_list').append('<option >' + i + '</option>');
-                        $('#districts_list').formSelect();
-
-                    }
-                });
+            for (i in dicto[mapping[selected_state]]['districts']) {
+                $('#districts_list').append('<option >' + i + '</option>');
+                $('#districts_list').formSelect();
+            }
         }
         function show_data() {
             var selectedState = document.getElementById("states_list").value;
             var selectedDistrict = document.getElementById("districts_list").value;
-            console.log(selectedDistrict);
-            fetch("https://api.covid19india.org/state_district_wise.json")
-                .then((response) => response.json())
-                .then((json) => {
-                    var confirmed = json[selectedState]['districtData'][selectedDistrict]['confirmed'];
-                    var active = json[selectedState]['districtData'][selectedDistrict]['active'];
-                    var death = json[selectedState]['districtData'][selectedDistrict]['deceased'];
-                    var recovered = json[selectedState]['districtData'][selectedDistrict]['recovered'];
-                    console.log(confirmed);
-                    document.getElementById("total").textContent = confirmed;
-                    document.getElementById("active").textContent = active;
-                    document.getElementById("recovered").textContent = recovered;
-                    document.getElementById("deaths").textContent = death;
-                });
+            var confirmed = dicto[mapping[selectedState]]['districts'][selectedDistrict]["total"]['confirmed'];
+            var death = dicto[mapping[selectedState]]['districts'][selectedDistrict]["total"]['deceased'];
+            var recovered = dicto[mapping[selectedState]]['districts'][selectedDistrict]["total"]['recovered'];
+            var tested = dicto[mapping[selectedState]]['districts'][selectedDistrict]["total"]['tested'];
+            var vaccinated = dicto[mapping[selectedState]]['districts'][selectedDistrict]["total"]['vaccinated'];
+
+            var active = confirmed - (death + recovered);
+            console.log(tested);
+            document.getElementById("total").textContent = confirmed;
+            document.getElementById("active").textContent = active;
+            document.getElementById("recovered").textContent = recovered;
+            document.getElementById("deaths").textContent = death;
+            document.getElementById("tested").textContent = tested;
+            document.getElementById("vaccinated").textContent = vaccinated;
+
+
         }
+
         function show_data2() {
-            var selectedState = document.getElementById("states_list").value;
-            var selectedDistrict = document.getElementById("districts_list").value;
-            console.log(selectedDistrict);
-            fetch("https://api.covid19india.org/state_district_wise.json")
-                .then((response) => response.json())
-                .then((json) => {
-                    var confirmed = json[selectedState]['districtData'][selectedDistrict]['confirmed'];
-                    var active = json[selectedState]['districtData'][selectedDistrict]['active'];
-                    var death = json[selectedState]['districtData'][selectedDistrict]['deceased'];
-                    var recovered = json[selectedState]['districtData'][selectedDistrict]['recovered'];
-                    console.log(confirmed);
-                    document.getElementById("total").textContent = confirmed;
-                    document.getElementById("active").textContent = active;
-                    document.getElementById("recovered").textContent = recovered;
-                    document.getElementById("deaths").textContent = death;
-                });
+            var selectedState = document.getElementById("states_list2").value;
+            var confirmed = dicto[mapping[selectedState]]['total']['confirmed'];
+            var death = dicto[mapping[selectedState]]['total']['deceased'];
+            var recovered = dicto[mapping[selectedState]]['total']['recovered'];
+            var active = confirmed - (recovered + death)
+            console.log(confirmed);
+            document.getElementById("total").textContent = confirmed;
+            document.getElementById("active").textContent = active;
+            document.getElementById("recovered").textContent = recovered;
+            document.getElementById("deaths").textContent = death;
         }
     </script>
 </body>
