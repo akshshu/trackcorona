@@ -117,6 +117,10 @@
         #stattab {
             color: black;
         }
+
+        .jj {
+            padding: 10px;
+        }
     </style>
     <title>TrackCorona</title>
 </head>
@@ -147,7 +151,7 @@
     </header>
 
     <div class="banner">
-        <section class="section  ">
+        <section class="section  jj">
             <div class="row">
                 <!-- <div class="col s12 l5  form-box">
                     <blockquote>
@@ -260,15 +264,15 @@
                     </div>
                     <div class="row">
                         <div class="col s6 l5 offset-l1 ">
-                            <div class=" green lighten-5 detail-card  ">
-                                <h4 class="center green-text text-darken-4 box-head" id="tested">0</h4>
-                                <h6 class="center green-text text-darken-4 green lighten-4 box-det">Tested</h6>
+                            <div class=" grey lighten-5 detail-card  ">
+                                <h4 class="center grey-text text-darken-4 box-head" id="tested">0</h4>
+                                <h6 class="center grey-text text-darken-4 grey lighten-4 box-det">Tested</h6>
                             </div>
                         </div>
                         <div class="col s6 l5 offset-l1 ">
-                            <div class=" red lighten-5 detail-card  ">
-                                <h4 class="center red-text box-head" id="vaccinated">0</h4>
-                                <h6 class="center red-text red lighten-4 box-det">Vaccinated</h6>
+                            <div class=" cyan lighten-5 detail-card  ">
+                                <h4 class="center cyan-text text-darken-4 box-head" id="vaccinated">0</h4>
+                                <h6 class="center cyan-text text-darken-4 cyan lighten-4 box-det">Vaccinated</h6>
                             </div>
                         </div>
 
@@ -466,7 +470,6 @@
                             ind_deaths += json[key]["total"]["deceased"];
                             ind_recovered += json[key]["total"]["recovered"];
                         }
-
                     }
                     for (var i = 0; i < states.length; i++) {
                         $('#states_list').append('<option >' + states[i] + '</option>');
@@ -475,10 +478,10 @@
                         $('#states_list2').formSelect();
                     }
                     ind_active = ind_confirmed - (ind_recovered + ind_deaths)
-                    document.getElementById("ind-total").textContent = ind_confirmed;
-                    document.getElementById("ind-active").textContent = ind_active;
-                    document.getElementById("ind-recovered").textContent = ind_recovered;
-                    document.getElementById("ind-deaths").textContent = ind_deaths;
+                    $("#ind-total").text(ind_confirmed);
+                    $("#ind-active").text(ind_active);
+                    $("#ind-recovered").text(ind_recovered);
+                    $("#ind-deaths").text(ind_deaths);
                 });
             fetch("https://api.covid19api.com/world/total")
                 .then((response) => response.json())
@@ -487,10 +490,10 @@
                     var worldTotal = json["TotalConfirmed"];
                     var worldDeath = json["TotalDeaths"];
                     var worldActive = worldTotal - (worldDeath + worldRecovered);
-                    document.getElementById("world-total").textContent = worldTotal;
-                    document.getElementById("world-active").textContent = worldActive;
-                    document.getElementById("world-recovered").textContent = worldRecovered;
-                    document.getElementById("world-deaths").textContent = worldDeath;
+                    $("#world-total").text(worldTotal);
+                    $("#world-active").text(worldActive);
+                    $("#world-recovered").text(worldRecovered);
+                    $("#world-deaths").text(worldDeath);
                 });
 
 
@@ -500,10 +503,6 @@
 
         });
         function res_district(selected_state) {
-            var i, districts = [];
-            console.log("s");
-            console.log(states);
-            console.log(dicto);
             $('#districts_list').empty();
             for (i in dicto[mapping[selected_state]]['districts']) {
                 $('#districts_list').append('<option >' + i + '</option>');
@@ -521,12 +520,12 @@
 
             var active = confirmed - (death + recovered);
             console.log(tested);
-            document.getElementById("total").textContent = confirmed;
-            document.getElementById("active").textContent = active;
-            document.getElementById("recovered").textContent = recovered;
-            document.getElementById("deaths").textContent = death;
-            document.getElementById("tested").textContent = tested;
-            document.getElementById("vaccinated").textContent = vaccinated;
+            $("#total").text((confirmed !== undefined) ? confirmed : "NAN");
+            $("#active").text((active !== undefined) ? active : "NAN");
+            $("#recovered").text((recovered !== undefined) ? recovered : "NAN");
+            $("#deaths").text((death !== undefined) ? death : "NAN");
+            $("#tested").text((tested !== undefined) ? tested : "NAN");
+            $("#vaccinated").text((vaccinated !== undefined) ? vaccinated : "NAN");
 
 
         }
@@ -536,12 +535,17 @@
             var confirmed = dicto[mapping[selectedState]]['total']['confirmed'];
             var death = dicto[mapping[selectedState]]['total']['deceased'];
             var recovered = dicto[mapping[selectedState]]['total']['recovered'];
+            var tested = dicto[mapping[selectedState]]['total']['tested'];
+            var vaccinated = dicto[mapping[selectedState]]['total']['vaccinated'];
+
             var active = confirmed - (recovered + death)
             console.log(confirmed);
-            document.getElementById("total").textContent = confirmed;
-            document.getElementById("active").textContent = active;
-            document.getElementById("recovered").textContent = recovered;
-            document.getElementById("deaths").textContent = death;
+            $("#total").text((confirmed !== undefined) ? confirmed : "NAN");
+            $("#active").text((active !== undefined) ? active : "NAN");
+            $("#recovered").text((recovered !== undefined) ? recovered : "NAN");
+            $("#deaths").text((death !== undefined) ? death : "NAN");
+            $("#tested").text((tested !== undefined) ? tested : "NAN");
+            $("#vaccinated").text((vaccinated !== undefined) ? vaccinated : "NAN");
         }
     </script>
 </body>
