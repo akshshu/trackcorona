@@ -450,7 +450,7 @@
             };
             states = []
             dicto = {}
-            fetch("https://api.covid19india.org/v4/min/data.min.json")
+            fetch("https://whispering-river-66194.herokuapp.com/https://api.covid19india.org/v4/min/data.min.json")
                 .then((response) => response.json())
                 .then((json) => {
                     dicto = json;
@@ -479,7 +479,7 @@
                     $("#ind-recovered").text(ind_recovered);
                     $("#ind-deaths").text(ind_deaths);
                 });
-            fetch("https://api.covid19api.com/world/total")
+            fetch("https://whispering-river-66194.herokuapp.com/https://api.covid19api.com/world/total")
                 .then((response) => response.json())
                 .then((json) => {
                     var worldRecovered = json["TotalRecovered"];
